@@ -3,11 +3,11 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-    "scripts": {
-    },
+    "scripts": {},
     "author": "",
     "license": "",
     "dependencies": {
+        "console.table": "^0.10.0",
         "inquirer": "^8.2.4",
         "mysql2": "^2.2.5",
         "sequelize": "^6.29.0"
