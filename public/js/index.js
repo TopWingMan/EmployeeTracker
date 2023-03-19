@@ -17,7 +17,6 @@ const Menu = () => {
     ])
     .then((data) =>
     {
-        // Use data to do something
         if (data.answer === 'View All Employees') {
             ViewAllEmployees();
         }
@@ -40,17 +39,25 @@ const Menu = () => {
             AddDepartment();
         }
         else if (data.answer === 'Quit') {
-            console.log("Quit");
+
         }
     })
 }
 
 const ViewAllDepartments = () => {
-        
+    connection.query('SELECT * FROM department', 
+    function(err, results) {
+        console.table(results);
+    })
+    Menu();
 }
 
 const ViewAllRoles = () => {
-        
+    connection.query('SELECT * FROM rolee', 
+    function(err, results) {
+        console.table(results);
+    })
+    Menu();
 }
 
 const ViewAllEmployees = () => {
@@ -58,6 +65,7 @@ const ViewAllEmployees = () => {
     function(err, results) {
         console.table(results);
     })
+    Menu();
 }
 
 const UpdateEmployeeRole = () => {
@@ -76,10 +84,14 @@ const AddDepartment = () => {
     ])
     .then((data) =>
     {
+        var sql = "INSERT INTO department (department_name) VALUES ?";
+        var values = [[data.name],];
         //Create a department with set name
-        console.log(data.name);
-        //Go back to menu
-        Menu();
+        connection.query(sql, [values], function (err, results) {
+            //tell results and go back to menu
+            console.log('Added department ' + data.name);
+            Menu();
+        })
     })
 }
 
@@ -105,10 +117,14 @@ const AddRole = () => {
     ])
     .then((data) =>
     {
-        //Create a role with set name, salary and department
-        console.log(`role name is ${data.name}, salary is ${data.salary}, department is ${data.department}.`);
-        //Go back to menu
-        Menu();
+        var sql = "INSERT INTO rolee (title, salary, department_id) VALUES ?";
+        var values = [[data.name, data.salary, data.department]];
+        //Create a rolee with set data
+        connection.query(sql, [values], function (err, results) {
+            //tell results and go back to menu
+            console.log('Added role ' + data.name);
+            Menu();
+        })
     })        
 }
 
@@ -128,21 +144,25 @@ const AddEmployee = () => {
         },
         {
             type: 'input',
-            name: 'name',
+            name: 'role',
             message: "What is the employee's role?",
         },
         {
             type: 'input',
-            name: 'name',
+            name: 'manager',
             message: "Who is the employee's manager?",
         },
     ])
     .then((data) =>
     {
-        //Create a role with set name
-        console.log(data.name);
-        //Go back to menu
-        Menu();
+        var sql = "INSERT INTO employee (first_name, last_name, manager_id, role_id) VALUES ?";
+        var values = [[data.first, data.last, data.manager, data.role]];
+        //Create a employee with set data
+        connection.query(sql, [values], function (err, results) {
+            //tell results and go back to menu
+            console.log('Added employee ' + data.first + " " + data.last);
+            Menu();
+        })
     })              
 }
 

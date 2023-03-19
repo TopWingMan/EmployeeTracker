@@ -3,7 +3,9 @@
     "version": "1.0.0",
     "description": "",
     "main": "index.js",
-    "scripts": {},
+    "scripts": {
+        "start": "node public/js/index.js"
+    },
     "author": "",
     "license": "",
     "dependencies": {
