@@ -69,7 +69,28 @@ const ViewAllEmployees = () => {
 }
 
 const UpdateEmployeeRole = () => {
-        
+    inquirer
+    .prompt
+    ([
+        {
+            type: 'input',
+            name: 'id',
+            message: 'Which employee would you like to update?',
+        },
+        {
+            type: 'input',
+            name: 'role',
+            message: 'What role would you like to give this employee?',
+        },
+    ])
+    .then((data) =>
+    {
+        connection.query('UPDATE employee SET role_id = ? WHERE id = ?', [data.role, data.id ],
+        function(err, results) {
+            if (err) {throw err;}
+            ViewAllEmployees();
+        })
+    })
 }
 
 const AddDepartment = () => {
