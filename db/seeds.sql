@@ -12,8 +12,8 @@ VALUES ("web-designer", 50000, 1),
        ("manager", 60000, 2);
 
 INSERT INTO employee (first_name, last_name, manager_id, role_id) 
-VALUES ("zach", "stan", 0, 1),
-       ("john", "poo", 0, 2);
+VALUES ("zach", "stan", 2, 1),
+       ("john", "uoo", 0, 2);
 
 SELECT * FROM department;
 SELECT * FROM rolee;
